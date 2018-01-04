@@ -1,0 +1,6 @@
+{
+    "ENABLE_ANDROID": "False",
+    "LY_ANDROID_NDK": "E:/android-ndk-r16b",
+    "LY_ANDROID_SDK": "E:/platforms",
+    "LY_JDK": "E:\\Java SE DK"
+}

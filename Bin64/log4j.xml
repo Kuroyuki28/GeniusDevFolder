@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j-configuration/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="METRICS" class="org.apache.log4j.rolling.RollingFileAppender">
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="FileNamePattern" value="${XSTX_METRICS_DIR}/Stx-Metrics.%d{yyyy-MM-dd-HH-mm}.log" />
+            <param name="activeFileName" value="${XSTX_LOG_DIR}/Stx-Metrics.log" />            
+        </rollingPolicy>
+
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%m" />
+        </layout>
+        <param name="file" value="${XSTX_LOG_DIR}/Stx-Metrics.log" />
+    </appender>
+    
+    <appender name="APPLICATION" class="org.apache.log4j.rolling.RollingFileAppender">
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <!-- note: these paths will be overridden by the individual application -->
+            <param name="ActiveFileName" value="${XSTX_LOG_DIR}/Stx.log" />
+            <param name="FileNamePattern" value="${XSTX_LOG_DIR}/Stx.%d{yyyy-MM-dd-HH}.log" />
+        </rollingPolicy>
+
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%m%n" />
+        </layout>
+        <param name="file" value="${XSTX_LOG_DIR}/Stx.log" />
+    </appender>
+	
+    <logger name="metricsOutputToFile" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="METRICS"/>
+    </logger>
+	
+    <logger name="metricsOutputToSocket" additivity="false">
+        <level value="DEBUG" />
+    </logger>
+
+    <logger name="DefaultLoggerToFile" additivity="false">
+        <level value="INFO" />
+        <appender-ref ref="APPLICATION" />
+    </logger>
+	
+    <logger name="DefaultLoggerToSocket" additivity="false">
+        <level value="INFO" />
+    </logger>
+
+    <logger name="SessionLoggerToFile" additivity="false">
+        <level value="INFO" />
+        <appender-ref ref="APPLICATION" />
+    </logger>
+	
+    <logger name="SessionLoggerToSocket" additivity="false">
+        <level value="INFO" />
+    </logger>
+
+</log4j:configuration>
